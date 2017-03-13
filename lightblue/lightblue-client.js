@@ -39,7 +39,6 @@ module.exports = function(RED) {
 
         var node = this;
 
-        //var options = url.parse("https://lightbluedatasvc.dev0.a1.vary.redhat.com/rest/data/find/containerProduct?from=0&to=0")
         var options = url.parse(this.lightblueconfig.host);
         options.cert = this.lightblueconfig.options.cert;
         options.key = this.lightblueconfig.options.key;
@@ -89,26 +88,36 @@ module.exports = function(RED) {
                 queryString += (queryString.length>0 ? "&":"");
                 queryString += "to="+node.to;
             }
+            if (queryString.length>0) {
+                queryString = "?"+queryString;
+            }
 
-            options.path = "/rest/data/find/" + node.collection + "?" + queryString;
+            options.path = "/rest/data/find/" + node.collection + queryString;
             options.parseprocessed = config.parseprocessed;;
 
             var req = https.request(options, function(res) {
+
+                var body = "";
                 res.on('data', function(data) {
+                    body += data;
+                });
+                res.on('end', function() {
                     if (res.statusCode==200) {
                         try {
-                            msg.payload = JSON.parse(data.toString());
                             if (options.parseprocessed) {
-                                msg.payload = JSON.parse(data.toString()).processed;
+                                msg.payload = JSON.parse(body).processed;
                             } else {
-                                msg.payload = JSON.parse(data.toString());
+                                msg.payload = JSON.parse(body);
                             }
                             node.send(msg);
                         } catch(e) {
-                            node.error("lightblue error occured", msg);
+                            node.error(e);
                         }
+                    } else {
+                        node.error(body);
                     }
                 });
+
             });
 
             req.end();
@@ -126,7 +135,6 @@ module.exports = function(RED) {
 
         var node = this;
 
-        //var options = url.parse("https://lightbluedatasvc.dev0.a1.vary.redhat.com/rest/data/find/containerProduct?from=0&to=0")
         var options = url.parse(this.lightblueconfig.host);
         options.cert = this.lightblueconfig.options.cert;
         options.key = this.lightblueconfig.options.key;
@@ -151,35 +159,35 @@ module.exports = function(RED) {
             }
 
             if (msg.query) {
-                try {
-                    node.query = msg.query;
-                } catch(e) {
-                    node.error("Fooo", msg);
-                }
-                
+                node.query = msg.query;   
             }
 
             options.path = "/rest/data/" + node.operation + "/" + node.collection;
             options.parseprocessed = config.parseprocessed;
 
-
-
             var req = https.request(options, function(res) {
+
+                var body = "";
                 res.on('data', function(data) {
+                    body += data;
+                });
+                res.on('end', function() {
                     if (res.statusCode==200) {
                         try {
-                            msg.payload = JSON.parse(data.toString());
                             if (options.parseprocessed) {
-                                msg.payload = JSON.parse(data.toString()).processed;
+                                msg.payload = JSON.parse(body).processed;
                             } else {
-                                msg.payload = JSON.parse(data.toString());
+                                msg.payload = JSON.parse(body);
                             }
                             node.send(msg);
                         } catch(e) {
-                            node.error("lightblue error occured", msg);
+                            node.error(e);
                         }
+                    } else {
+                        node.error(body);
                     }
                 });
+
             });
 
             if (node.query) {
