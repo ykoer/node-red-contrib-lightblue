@@ -1,0 +1,20 @@
+{
+  "author": {
+    "name": "Yusuf Kör, yusuf.koer@googlemail.com"
+  },
+  "dependencies": {
+  },
+  "description": "A lightblue client for node-red which supports simple and complex queries.",
+  "name": "node-red-contrib-lightblue",
+  "keywords": [
+    "node-red",
+    "lightblue"
+  ],
+  "node-red": {
+    "nodes": {
+      "lightblue-config": "lightblue/lightblue-config.js",
+      "lightblue-client": "lightblue/lightblue-client.js"
+    }
+  },
+  "version": "0.1.0"
+}

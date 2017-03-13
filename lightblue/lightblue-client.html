@@ -1,0 +1,135 @@
+<script type="text/javascript">
+    RED.nodes.registerType('lightblue-simple-client',{
+        category: 'lightblue',
+        color: '#add8e6',
+        defaults: {
+            lightblueconfig: {value:"", type:"lightblue-config"},
+            name: {value:""},
+            collection: {value:""},
+            query: {value:""},
+            projection: {value:""},
+            sort: {value:""},
+            from: {value:""},
+            to: {value:""},
+            parseprocessed: {value: false},
+        },
+        inputs:1,
+        outputs:1,
+        icon: "db.png",
+        label: function() {
+            return this.name||"lightblue-simple-client";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="lightblue-simple-client">
+    <div class="form-row">
+        <label for="node-input-lightblueconfig"><i class="fa fa-globe"></i>Lightblue</label>
+        <input type="text" id="node-input-lightblueconfig">
+    </div>
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-collection"><i class="fa fa-table"></i> Collection</label>
+        <input type="text" id="node-input-collection" placeholder="Collection">
+    </div>
+    <div class="form-row">
+        <label for="node-input-query"><i class="fa fa-search"></i> Query</label>
+        <input type="text" id="node-input-query" placeholder="Query">
+    </div>
+    <div class="form-row">
+        <label for="node-input-projection"><i class="fa fa-filter"></i> Projection</label>
+        <input type="text" id="node-input-projection" placeholder="Projection">
+    </div>
+    <div class="form-row">
+        <label for="node-input-sort"><i class="fa fa-sort"></i> Sort</label>
+        <input type="text" id="node-input-sort" placeholder="Sort">
+    </div>
+    <div class="form-row">
+        <label for="node-input-from"><i class="fa fa-arrow-right"></i> From</label>
+        <input type="text" id="node-input-from" placeholder="From">
+    </div>
+    <div class="form-row">
+        <label for="node-input-to"><i class="fa fa-arrow-left"></i> To</label>
+        <input type="text" id="node-input-to" placeholder="To">
+    </div>
+    <div class="form-row">
+        <label for="node-input-parseprocessed" style="width: auto">Parse Processed</label>
+        <input type="checkbox" id="node-input-parseprocessed" style="display: inline-block; width: auto; vertical-align: top;">
+    </div>
+
+</script>
+
+<script type="text/x-red" data-help-name="lightblue-simple-client">
+    <p>A simplified lightblue find API that takes just query parameters to do a simple search.</p>
+    <p>The query specification can be found here: https://jewzaam.gitbooks.io/lightblue-specifications/content/rest_specification/get_find_simple.html</p>
+</script>
+
+
+<script type="text/javascript">
+    RED.nodes.registerType('lightblue-complex-client',{
+        category: 'lightblue',
+        color: '#add8e6',
+        defaults: {
+            lightblueconfig: {value:"", type:"lightblue-config"},
+            name: {value:""},
+            collection: {value:""},
+            query: {value:""},
+            operation: {value:""},
+            parseprocessed: {value: false},
+        },
+        inputs:1,
+        outputs:1,
+        icon: "db.png",
+        label: function() {
+            return this.name||"lightblue-complex-client";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="lightblue-complex-client">
+    <div class="form-row">
+        <label for="node-input-lightblueconfig"><i class="fa fa-globe"></i>Lightblue</label>
+        <input type="text" id="node-input-lightblueconfig">
+    </div>
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-collection"><i class="fa fa-table"></i> Collection</label>
+        <input type="text" id="node-input-collection" placeholder="Collection">
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-operation">Operation</label>
+        <select style="width: 100px" id="node-input-operation">
+            <option value="find">find</option>
+            <option value="insert">insert</option>
+            <option value="save">save</option>
+            <option value="update">update</option>
+            <option value="delete">delete</option>
+        </select><br/>
+    </div>
+
+
+    <div class="form-row">
+        <label for="node-input-query"><i class="icon-tag"></i> Query</label>
+        <input type="text" id="node-input-query" placeholder="Query">
+    </div>
+    
+    <div class="form-row">
+        <label for="node-input-parseprocessed" style="width: auto">Parse Processed</label>
+        <input type="checkbox" id="node-input-parseprocessed" style="display: inline-block; width: auto; vertical-align: top;">
+    </div>
+
+</script>
+
+<script type="text/x-red" data-help-name="lightblue-complex-client">
+    <p>A complex lightblue client which finds documents based on a complex query.</p>
+    <p>The query specification can be found here: https://jewzaam.gitbooks.io/lightblue-specifications/content/rest_specification/post_find.html</p>
+</script>
+
+
