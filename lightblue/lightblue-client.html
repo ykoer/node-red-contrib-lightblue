@@ -36,20 +36,20 @@
 
 <script type="text/x-red" data-template-name="lightblue-config">
     <div class="form-row">
-        <label style="width: 120px;" for="node-config-input-name"><i class="fa fa-tag"></i> <span data-i18n="common.label.name"></span></label>
-        <input style="width: 60%;" type="text" id="node-config-input-name" data-i18n="[placeholder]common.label.name">
+        <label style="width: 120px;" for="node-config-input-name"><i class="fa fa-tag"></i> Config Name</label>
+        <input style="width: 60%;" type="text" id="node-config-input-name" placeholder="Config Name">
     </div>
     <div class="form-row">
         <input type="checkbox" id="node-config-input-lbusetls" style="display: inline-block; width: auto; vertical-align: top;">
-        <label for="node-config-input-lbusetls" style="width: auto" data-i18n="mqtt.label.use-tls"></label>
+        <label for="node-config-input-lbusetls" style="width: auto">Use TLS</label>
         <div id="node-config-row-lbtls" class="hide">
-            <label style="width: auto; margin-left: 20px; margin-right: 10px;" for="node-config-input-lbtls"><span data-i18n="mqtt.label.tls-config"></span></label><input style="width: 300px;" type="text" id="node-config-input-lbtls">
+            <label style="width: auto; margin-left: 20px; margin-right: 10px;" for="node-config-input-lbtl"><i class="fa fa-key"></i> TLS Config</label>
+            <input style="width: 300px;" type="text" id="node-config-input-lbtls">
         </div>
     </div>
 
-
     <div class="form-row">
-        <label style="width: 120px;" for="node-config-input-host"><i class="icon-bookmark"></i> Host</label>
+        <label style="width: 120px;" for="node-config-input-host"><i class="fa fa-server"></i> LB Data Url</label>
         <input type="text" id="node-config-input-host">
     </div>
 
@@ -73,7 +73,7 @@
         },
         inputs:1,
         outputs:1,
-        align: "right",
+        align: "left",
         icon: "db.png",
         label: function() {
             return this.name||"lightblue-simple-client";
@@ -144,7 +144,7 @@
         },
         inputs:1,
         outputs:1,
-        align: "right",
+        align: "left",
         icon: "db.png",
         label: function() {
             return this.name||"lightblue-complex-client";
