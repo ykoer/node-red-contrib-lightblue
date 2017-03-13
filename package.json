@@ -12,8 +12,7 @@
   ],
   "node-red": {
     "nodes": {
-      "lightblue-config": "lightblue/lightblue-config.js",
-      "lightblue-client": "lightblue/lightblue-client.js"
+        "lightblue-client": "lightblue/lightblue-client.js"
     }
   },
   "version": "0.1.0"

@@ -3,10 +3,27 @@ var url = require('url');
 var fs = require('fs');
 
 module.exports = function(RED) {
+    "use strict";
 
-    function isNotEmpty (val) {
-            return val !== undefined && val !== '';
+    function LightblueConfig(n) {
+        RED.nodes.createNode(this,n);
+        this.host = n.host;
+        this.lbusetls = n.lbusetls;
+        this.options = {};
+
+        if (typeof this.lbusetls === 'undefined'){
+            this.lbusetls = false;
+        }
+
+        if (this.lbusetls && n.lbtls) {
+            var tlsNode = RED.nodes.getNode(n.lbtls);
+            if (tlsNode) {
+                tlsNode.addTLSOptions(this.options);
+            }
+        }
+
     }
+    RED.nodes.registerType("lightblue-config",LightblueConfig);
 
     function LightblueSimpleClient(config) {
         RED.nodes.createNode(this,config);
@@ -97,7 +114,6 @@ module.exports = function(RED) {
             req.end();
         });
     }
-
     RED.nodes.registerType("lightblue-simple-client",LightblueSimpleClient);
 
     function LightblueComplexClient(config) {
@@ -176,7 +192,10 @@ module.exports = function(RED) {
             req.end();
         });
     }
-
     RED.nodes.registerType("lightblue-complex-client", LightblueComplexClient);
+
+    function isNotEmpty (val) {
+            return val !== undefined && val !== '';
+    }
 }
 

@@ -1,3 +1,61 @@
+<!-- lightblue config node -->
+<script type="text/javascript">
+    RED.nodes.registerType('lightblue-config',{
+        category: 'config',
+        defaults: {
+            name: {value:""},
+            lbusetls: {value: false},
+            lbtls: {type:"tls-config",required: false},
+            host: {value:"localhost",required:true},
+        },
+        label: function() {
+            return this.host;
+        },
+        oneditprepare: function () {
+            
+            function updateTLSOptions() {
+                console.log($("#node-config-input-lbusetls"));
+                if ($("#node-config-input-lbusetls").is(':checked')) {
+                    $("#node-config-row-lbtls").show();
+                } else {
+                    $("#node-config-row-lbtls").hide();
+                }
+            }
+            updateTLSOptions();
+            $("#node-config-input-lbusetls").on("click",function() {
+                updateTLSOptions();
+            });
+        },
+        oneditsave: function() {
+            if (!$("#node-config-input-lbusetls").is(':checked')) {
+                $("#node-config-input-lbtls").val("");
+            }
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="lightblue-config">
+    <div class="form-row">
+        <label style="width: 120px;" for="node-config-input-name"><i class="fa fa-tag"></i> <span data-i18n="common.label.name"></span></label>
+        <input style="width: 60%;" type="text" id="node-config-input-name" data-i18n="[placeholder]common.label.name">
+    </div>
+    <div class="form-row">
+        <input type="checkbox" id="node-config-input-lbusetls" style="display: inline-block; width: auto; vertical-align: top;">
+        <label for="node-config-input-lbusetls" style="width: auto" data-i18n="mqtt.label.use-tls"></label>
+        <div id="node-config-row-lbtls" class="hide">
+            <label style="width: auto; margin-left: 20px; margin-right: 10px;" for="node-config-input-lbtls"><span data-i18n="mqtt.label.tls-config"></span></label><input style="width: 300px;" type="text" id="node-config-input-lbtls">
+        </div>
+    </div>
+
+
+    <div class="form-row">
+        <label style="width: 120px;" for="node-config-input-host"><i class="icon-bookmark"></i> Host</label>
+        <input type="text" id="node-config-input-host">
+    </div>
+
+</script>
+
+<!-- lightblue simple client node -->
 <script type="text/javascript">
     RED.nodes.registerType('lightblue-simple-client',{
         category: 'lightblue',
@@ -15,9 +73,13 @@
         },
         inputs:1,
         outputs:1,
+        align: "right",
         icon: "db.png",
         label: function() {
             return this.name||"lightblue-simple-client";
+        },
+        paletteLabel: function() {
+            return "lb simple";
         }
     });
 </script>
@@ -67,7 +129,7 @@
     <p>The query specification can be found here: https://jewzaam.gitbooks.io/lightblue-specifications/content/rest_specification/get_find_simple.html</p>
 </script>
 
-
+<!-- lightblue complex client node -->
 <script type="text/javascript">
     RED.nodes.registerType('lightblue-complex-client',{
         category: 'lightblue',
@@ -82,9 +144,13 @@
         },
         inputs:1,
         outputs:1,
+        align: "right",
         icon: "db.png",
         label: function() {
             return this.name||"lightblue-complex-client";
+        },
+        paletteLabel: function() {
+            return "lb complex";
         }
     });
 </script>
