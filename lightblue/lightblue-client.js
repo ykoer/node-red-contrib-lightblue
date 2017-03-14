@@ -7,6 +7,7 @@ module.exports = function(RED) {
 
     function LightblueConfig(n) {
         RED.nodes.createNode(this,n);
+        this.name = n.name;
         this.host = n.host;
         this.lbusetls = n.lbusetls;
         this.options = {};
@@ -129,6 +130,8 @@ module.exports = function(RED) {
         RED.nodes.createNode(this,config);
         this.collection = config.collection;
         this.operation = config.operation;
+        this.query = config.query;
+
 
         // Retrieve the config node
         this.lightblueconfig = RED.nodes.getNode(config.lightblueconfig);
@@ -157,6 +160,8 @@ module.exports = function(RED) {
                     return;
                 }
             }
+
+
 
             if (msg.query) {
                 node.query = msg.query;   

@@ -9,7 +9,7 @@
             host: {value:"localhost",required:true},
         },
         label: function() {
-            return this.host;
+            return this.name;
         },
         oneditprepare: function () {
             
@@ -151,6 +151,40 @@
         },
         paletteLabel: function() {
             return "lb complex";
+        },
+        oneditprepare: function() {
+            this.editor = RED.editor.createEditor({
+                id: 'node-input-query-editor',
+                mode: 'ace/mode/javascript',
+                value: $("#node-input-query").val(),
+                globals: {
+                    msg:true,
+                    context:true,
+                    RED: true,
+                    util: true,
+                    flow: true,
+                    global: true,
+                    console: true,
+                    Buffer: true,
+                    setTimeout: true,
+                    clearTimeout: true,
+                    setInterval: true,
+                    clearInterval: true
+                }
+            });
+
+            RED.library.create({
+                url:"functions", // where to get the data from
+                type:"function", // the type of object the library is for
+                editor:this.editor, // the field name the main text body goes to
+                mode:"ace/mode/javascript",
+                fields:['name','outputs']
+            });
+            this.editor.focus();
+        },
+        oneditsave: function() {
+            $("#node-input-query").val(this.editor.getValue());
+            delete this.editor;
         }
     });
 </script>
@@ -180,11 +214,15 @@
         </select><br/>
     </div>
 
-
-    <div class="form-row">
-        <label for="node-input-query"><i class="icon-tag"></i> Query</label>
-        <input type="text" id="node-input-query" placeholder="Query">
+    <div class="form-row" style="margin-bottom: 0px;">
+        <label for="node-input-query"><i class="fa fa-wrench"></i> Query</label>
+        <input type="hidden" id="node-input-query" autofocus="autofocus">
+        <input type="hidden" id="node-input-noerr">
     </div>
+    <div class="form-row node-text-editor-row">
+        <div style="height: 250px; min-height:150px;" class="node-text-editor" id="node-input-query-editor" ></div>
+    </div>
+
     
     <div class="form-row">
         <label for="node-input-parseprocessed" style="width: auto">Parse Processed</label>
