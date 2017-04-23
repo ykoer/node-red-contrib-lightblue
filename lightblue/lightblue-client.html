@@ -70,6 +70,7 @@
             from: {value:""},
             to: {value:""},
             parseprocessed: {value: false},
+            output: {value:"msg.payload"}
         },
         inputs:1,
         outputs:1,
@@ -121,6 +122,10 @@
         <label for="node-input-parseprocessed" style="width: auto">Parse Processed</label>
         <input type="checkbox" id="node-input-parseprocessed" style="display: inline-block; width: auto; vertical-align: top;">
     </div>
+    <div class="form-row">
+        <label for="node-input-to"><i class="fa fa-arrow-right"></i> Output</label>
+        msg.<input type="text" id="node-input-output" placeholder="payload">
+    </div>
 
 </script>
 
@@ -141,6 +146,7 @@
             query: {value:""},
             operation: {value:""},
             parseprocessed: {value: false},
+            output: {value:"msg.payload"}
         },
         inputs:1,
         outputs:1,
@@ -202,7 +208,6 @@
         <label for="node-input-collection"><i class="fa fa-table"></i> Collection</label>
         <input type="text" id="node-input-collection" placeholder="Collection">
     </div>
-
     <div class="form-row">
         <label for="node-input-operation">Operation</label>
         <select style="width: 100px" id="node-input-operation">
@@ -213,7 +218,6 @@
             <option value="delete">delete</option>
         </select><br/>
     </div>
-
     <div class="form-row" style="margin-bottom: 0px;">
         <label for="node-input-query"><i class="fa fa-wrench"></i> Query</label>
         <input type="hidden" id="node-input-query" autofocus="autofocus">
@@ -222,13 +226,14 @@
     <div class="form-row node-text-editor-row">
         <div style="height: 250px; min-height:150px;" class="node-text-editor" id="node-input-query-editor" ></div>
     </div>
-
-    
     <div class="form-row">
         <label for="node-input-parseprocessed" style="width: auto">Parse Processed</label>
         <input type="checkbox" id="node-input-parseprocessed" style="display: inline-block; width: auto; vertical-align: top;">
     </div>
-
+    <div class="form-row">
+        <label for="node-input-to"><i class="fa fa-arrow-right"></i> Output</label>
+        <input type="text" id="node-input-output" placeholder="To">
+    </div>
 </script>
 
 <script type="text/x-red" data-help-name="lightblue-complex-client">

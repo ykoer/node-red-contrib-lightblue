@@ -34,6 +34,7 @@ module.exports = function(RED) {
         this.sort = config.sort;
         this.from = config.from;
         this.to = config.to;
+        this.output = config.output;
 
         // Retrieve the config node
         this.lightblueconfig = RED.nodes.getNode(config.lightblueconfig);
@@ -104,11 +105,15 @@ module.exports = function(RED) {
                 });
                 res.on('end', function() {
                     if (res.statusCode==200) {
+                        if (!node.output) {
+                            node.output = "payload";
+                        }
+
                         try {
                             if (options.parseprocessed) {
-                                msg.payload = JSON.parse(body).processed;
+                                msg[node.output] = JSON.parse(body).processed;
                             } else {
-                                msg.payload = JSON.parse(body);
+                                msg[node.output] = JSON.parse(body);
                             }
                             node.send(msg);
                         } catch(e) {
@@ -131,7 +136,7 @@ module.exports = function(RED) {
         this.collection = config.collection;
         this.operation = config.operation;
         this.query = config.query;
-
+        this.output = config.output;
 
         // Retrieve the config node
         this.lightblueconfig = RED.nodes.getNode(config.lightblueconfig);
@@ -178,11 +183,15 @@ module.exports = function(RED) {
                 });
                 res.on('end', function() {
                     if (res.statusCode==200) {
+                        if (!node.output) {
+                            node.output = "payload";
+                        }
+
                         try {
                             if (options.parseprocessed) {
-                                msg.payload = JSON.parse(body).processed;
+                                msg[node.output] = JSON.parse(body).processed;
                             } else {
-                                msg.payload = JSON.parse(body);
+                                msg[node.output] = JSON.parse(body);
                             }
                             node.send(msg);
                         } catch(e) {
