@@ -44,6 +44,7 @@ module.exports = function(RED) {
         var options = url.parse(this.lightblueconfig.host);
         options.cert = this.lightblueconfig.options.cert;
         options.key = this.lightblueconfig.options.key;
+        options.ca = this.lightblueconfig.options.ca;
 
         this.on('input', function(msg) {
             if (!node.collection) {
@@ -146,6 +147,7 @@ module.exports = function(RED) {
         var options = url.parse(this.lightblueconfig.host);
         options.cert = this.lightblueconfig.options.cert;
         options.key = this.lightblueconfig.options.key;
+        options.ca = this.lightblueconfig.options.ca;
         options.method = 'POST';
 
         this.on('input', function(msg) {
